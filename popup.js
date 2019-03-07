@@ -12,8 +12,27 @@ function click(e) {
 document.addEventListener('DOMContentLoaded', function() {
     let uri = window.location.href;
     let body = document.body.textContent.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim();
+    let scripts = document.querySelectorAll('script');
+    let inputs = document.querySelectorAll('input');
+    
+    document.body.remove(querySelectorAll('nav'));
+    let navs = document.querySelectorAll('nav');
+    navs.parentNode.removeChild(navs)
+
+    body.remove(inputs);
+    scripts.remove();
     let json_output = JSON.stringify(body)
     console.log(body);
+
+    $('nav').remove();
+    $('img').remove();
+    $('a').remove();
+    $('script').remove();
+    $('link').remove();
+    $('li').contents().unwrap();
+    $('li').remove();
+    $('body').remove('.');
+    $('body').removeClass("");
 })
 
 const images = {
