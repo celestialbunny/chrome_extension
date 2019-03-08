@@ -1,0 +1,345 @@
+* {
+    text-align: center;
+    box-sizing: border-box;
+    line-height: 1.3;
+    /* background-color: white; */
+}
+
+body {
+    background-color: beige;
+    font-size: 1.1rem;
+}
+
+.name:after {
+    content: "Chai Chong Teh";
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+/* Navigation Styles */
+.title {
+    text-align: center;
+    padding: 2rem 0;
+    text-transform: uppercase;
+    display: block;
+    font-weight: bold;
+}
+
+.header {
+    background-color: beige;
+    padding: 0.5rem 1rem;
+    z-index: 100;
+    transition: all 0.5s;
+}
+
+.header:hover {
+    background-color: rgb(141, 247, 114);
+}
+
+.header ul {
+    padding: 0.3rem 0;
+}
+
+.header ul li {
+    /* background: white; */
+    text-transform: uppercase;
+    list-style: none;
+    display: block;
+    margin: 0.5rem 0;
+    padding: 1rem;
+}
+
+a:hover,
+a:visited:hover {
+    color: rgba(108, 63, 150, 0.8);
+}
+
+a,
+a:visited {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 0 50px 10px rgba(0, 0, 0, 1);
+}
+
+.sticky ul {
+    display: flex;
+    justify-content: center;
+}
+
+/* Profile Styles */
+
+.introduction {
+    padding: 1rem 4rem;
+    margin-top: 2rem;
+}
+
+#profile-picture {
+    width: 100%;
+    max-width: 350px;
+}
+
+.introduction p {
+    margin: 0.5rem 0.8rem 3rem 0.8rem;
+    line-height: 1.3;
+}
+
+/* Portfolio Styles */
+#portfolio:target::before {
+    content:"";
+    display:block;
+    top: -20rem;
+}
+
+.small-title {
+    font-size: 1.5rem;
+    padding: 0.8rem 0;
+}
+
+main.content {
+    background-color: white;
+}
+
+.cards {
+    display: block;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 0 1rem;
+    transition: all 0.5s;
+}
+
+.cards:hover {
+    background-color: rgba(164, 101, 223, 0.8);
+    box-shadow: 0 15px 30px 0 rgba(0,0,0,0.31),
+    0 5px 15px 0 rgba(0,0,0,0.38);
+}
+
+.cards img {
+    /* display: block; */
+    object-fit: cover;
+    width: 100%;
+    height: 200px;
+    position: relative;
+    padding-top: 0.5rem;
+}
+
+.description {
+    padding-top: 0.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+}
+
+/* Skill Styles */
+.skill-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    margin-bottom: 2rem;
+}
+
+.skill-container li {
+    flex: 1 300px;
+    padding: 1rem;
+    text-align: justify;
+}
+
+.skill-container li:hover [class^="icon"] {
+    color: orangered;
+}
+
+[class^="icon"] {
+    font-size: 2rem;
+    float: left;
+    padding-right: 0.5rem;
+    transition: all 0.5s;
+}
+
+/* Contact Styles */
+#contact {
+    background-color: beige;
+    color: rgb(94, 98, 102);
+    padding: 1rem 1rem;
+}
+
+hr {
+    margin-top: 2rem;
+    width: 80%;
+    color: rgb(200, 200, 200);
+}
+
+.address li {
+    /* margin: 1.5rem 0; */
+    margin-top: 1rem;
+}
+
+/* Footer Styles */
+footer {
+    margin: 1.5rem 0;
+}
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 2rem;
+}
+
+.appear-large {
+    display: none;
+}
+
+@media screen and (min-width: 768px) {
+    body * {
+        vertical-align: top;
+    }
+
+    .title {
+        color: black;
+    }
+
+    header * {
+        justify-content: space-around;
+    }
+
+    .header ul {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .header ul li {
+        /* background-color: beige; */
+        padding: 0 2rem;
+    }
+    
+    .introduction {
+        display: flex;
+        flex-direction: row-reverse;
+        margin-bottom: 3rem;
+        padding: 20px;
+    }
+    
+    .introduction p {
+        text-align: left;
+        width: 100%;
+        padding-right: 1rem;
+    }
+
+    #profile-picture {
+        width: 45%;
+        max-width: initial;
+        margin: 0;
+        padding: 0;
+    }
+
+    #portfolio:target::before {
+        content:"";
+        display:block;
+        /* height: 550px; */
+        /* margin: -120px 0 0 0; */
+    }
+
+    .cards {
+        display: inline-block;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: calc(50% - 1.2rem);
+        padding: 0.3rem;
+    }
+
+    .cards > * {
+        display: block;
+    }
+
+    .small-title {
+        padding: 0.8rem 0;
+    }
+
+    
+
+    .appear-usual {
+        display: none;
+    }
+
+    .appear-large {
+        display: flex;
+        font-weight: bold;
+    }
+    .appear-large * {
+        padding-left: 2rem;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    body {
+        max-width: 1024px;
+        margin: auto;
+    }
+
+    #profile {
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        vertical-align: center;
+    }
+    
+    .top-container,
+    .introduction {
+        padding: 0 2rem;
+    }
+
+    h2.title {
+        padding: 2rem 0;
+    }
+
+    .header {
+        padding: 1.7rem 0;
+        display: inline-flex;
+    }
+
+    .header ul {
+        max-width: 1024px;
+        justify-content: flex-end;
+    }
+    
+    .introduction {
+        width: 100%;
+    }
+
+    .content {
+        margin: 4rem 10px 10px 10px;
+    }
+
+    .cards {
+        width: calc(33.33% - 30px);
+        margin: 0 0.5rem 1rem 0.5rem;
+    }
+/* 
+    .appear-usual {
+        display: none;
+    }
+
+    .appear-large {
+        display: flex;
+        font-weight: bold;
+    }
+    .appear-large * {
+        padding-left: 2rem;
+    } */
+}

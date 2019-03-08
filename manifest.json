@@ -4,17 +4,24 @@
     "manifest_version": 2,
 
 
-    "description": "Read page content and sent to AI server for recommendation",
+    "description": "RTest",
     "icons": {
         "128": "100_percent_128.png"
     },
 
     "browser_action": {
-        "default_title": "Loan Suggestion for Malaysian",
+        "default_title": "Test Extension",
         "default_popup": "popup.html"
     },
 
     "permissions": [
         "http://*/*", "https://*/*"
+    ],
+    "content_scripts": [
+        {
+          "matches": ["*://*/*"],
+          "run_at": "document_idle",
+          "js": ["popup.js"]
+        }
     ]
 }
