@@ -16,5 +16,13 @@
 
     "permissions": [
         "http://*/*", "https://*/*"
+    ],
+
+    "content_scripts": [
+        {
+          "matches": ["*://*/*"],
+          "run_at": "document_idle",
+          "js": ["popup.js"]
+        }
     ]
 }
