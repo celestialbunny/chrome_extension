@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 document.addEventListener('DOMContentLoaded', function () {
 	// 1. Select the portion of the document to be processed
 	let body = document.body;
@@ -56,3 +57,22 @@ for (let i = 0; i < games.length; i++) {
 	let wrapper = document.getElementById("container");
 	wrapper.appendChild(li);
 }
+=======
+chrome.tabs.executeScript(null, function (event) {
+    const deletes = [
+        'nav',
+        'header',
+        'footer',
+        'img',
+        'a',
+        'span',
+        'link',
+        'script'
+        // 'form'
+    ];
+    for (i in deletes) {
+        const item = document.querySelectorAll(deletes[i]);
+        [...item].forEach(e => e.remove());
+    }
+});
+>>>>>>> 4df177d922ab81fb9265a1de0177b6f31bf19492
