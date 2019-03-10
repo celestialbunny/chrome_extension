@@ -1,34 +1,58 @@
-function click(e) {
-    // null for current tab, number specified will be referring to the tab (number) available
-    chrome.tabs.executeScript(null,{code:"document.body.style.backgroundImage='url(" + images[e.target.id] + "'"});
-    // chrome.tabs.executeScript(null,{
-    //     code:"document.body.style.backgroundImage='url(https://cloud.fullstackacademy.com/nimit_maru.jpg)'"
-    // });
-    window.close();
+document.addEventListener('DOMContentLoaded', function () {
+	// 1. Select the portion of the document to be processed
+	let body = document.body;
+	// 2. Make a copy of the portion and perform operation from here in order not to affect the "current"  webpage
+	let cloned_body = body.cloneNode(true);
+	// 3. select the " undesired parts" to be dumped
+	const deletes = [
+		'nav',
+		'header',
+		'footer',
+		'img',
+		'a',
+		'span',
+		'link',
+		'script',
+		'noscript'
+	];
+	// 4. Perform the deletion of parts via destructuring each individual selected "portion"
+	for (i in deletes) {
+		const item = cloned_body.querySelectorAll(deletes[i]);
+		[...item].forEach(e => e.remove());
+	}
+	// 5. Select the partially "cleansed" data to be "purified"
+	cloned_body = cloned_body.textContent;
+	cloned_body = cloned_body.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim();
+	cloned_body = cloned_body.replace(/<\!--.*?-->/g, "");
+	// 6. Perform suitable "formatting" to convert "cleansed" data into JSON
+	let stringified_body = JSON.stringify(cloned_body);
+	// let parsed_body = JSON.parse(stringified_body);
+	// 7. Send the data a specific website
+	let web_address = "http://www.example.com";
+	xmlhttp.open("POST", web_address);
+	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+	xmlhttp.send("FirstName=Chris&LastName=Minnick");
+	/**
+	 * Operations after receiving response from website
+	 * Perform if else condition from here on
+	 */
+});
+
+const games = [
+	"Metal Gear Solid",
+	"God of War IV",
+	"Assassin's Creed Odyssey",
+	"Battlefied V",
+	"Warhammer: Vermintide",
+	"Shadow of the Tomb Raider",
+	"Devil May Cry 5",
+	"Far Cry 5"
+];
+
+for (let i = 0; i < games.length; i++) {
+	let li = document.createElement("li");
+	let node = document.createTextNode(games[i]);
+	li.appendChild(node);
+	let wrapper = document.getElementById("container");
+	wrapper.appendChild(li);
 }
-
-// http://motyar.info/webscrapemaster/api/?url={url}&xpath={xpath}&attr={attr}&callback={callback}
-
-document.addEventListener('DOMContentLoaded', function() {
-    let body = document.body;
-    let cloned_body = body.cloneNode(true);
-    const deletes = [
-        'nav',
-        'header',
-        'footer',
-        'img',
-        'a',
-        'span',
-        'link',
-        'script',
-        'noscript'
-        // 'form'
-    ];
-    for (i in deletes) {
-        const item = cloned_body.querySelectorAll(deletes[i]);
-        [...item].forEach(e => e.remove());
-    }
-    cloned_body = cloned_body.textContent;
-    cloned_body = cloned_body.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim();
-    cloned_body = cloned_body.replace(/<\!--.*?-->/g, "");
-})
