@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 document.addEventListener('DOMContentLoaded', function () {
 	// 1. Select the portion of the document to be processed
 	let body = document.body;
@@ -29,50 +28,59 @@ document.addEventListener('DOMContentLoaded', function () {
 	let stringified_body = JSON.stringify(cloned_body);
 	// let parsed_body = JSON.parse(stringified_body);
 	// 7. Send the data a specific website
-	let web_address = "http://www.example.com";
-	xmlhttp.open("POST", web_address);
-	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
-	xmlhttp.send("FirstName=Chris&LastName=Minnick");
 	/**
 	 * Operations after receiving response from website
 	 * Perform if else condition from here on
 	 */
-});
+	url = `https://dog.ceo/api/breeds/list/all`;
+	fetchData(url)
+		.then(data => populate(data.message))
 
-const games = [
-	"Metal Gear Solid",
-	"God of War IV",
-	"Assassin's Creed Odyssey",
-	"Battlefied V",
-	"Warhammer: Vermintide",
-	"Shadow of the Tomb Raider",
-	"Devil May Cry 5",
-	"Far Cry 5"
-];
+	function fetchData(url) {
+		return fetch(url)
+			.then(checkStatus)
+			.then(response => response.json())
+			.catch(error => console.log("Looks like there was a problem", error))
+	}
 
-for (let i = 0; i < games.length; i++) {
-	let li = document.createElement("li");
-	let node = document.createTextNode(games[i]);
-	li.appendChild(node);
-	let wrapper = document.getElementById("container");
-	wrapper.appendChild(li);
-}
-=======
-chrome.tabs.executeScript(null, function (event) {
-    const deletes = [
-        'nav',
-        'header',
-        'footer',
-        'img',
-        'a',
-        'span',
-        'link',
-        'script'
-        // 'form'
-    ];
-    for (i in deletes) {
-        const item = document.querySelectorAll(deletes[i]);
-        [...item].forEach(e => e.remove());
-    }
+	function checkStatus(response) {
+		if (response.ok) {
+			return Promise.resolve(response);
+		} else {
+			return Promise.reject(new Error(response.statusText));
+		}
+	}
+
+	function populate(dog_list) {
+		const container = document.getElementById("container");
+		for (dog in dog_list) {
+			let li = document.createElement("li");
+			let node = document.createTextNode(dog);
+			li.appendChild(node);
+			container.appendChild(li);
+		}
+	}
+
+	/**
+	 * Original function
+	 */
+	// 	let dog_list = [];
+	// const container = document.getElementById("container");
+	// fetch('https://dog.ceo/api/breeds/list/all')
+	//     .then(response => {
+	//         if (response.ok) {
+	//             return response.json();
+	//         } else {
+	//             throw new Error(response.statusText);
+	//         }
+	//     })
+	//     .then(data => {
+	//         dog_list = data.message;
+	//         for (dog in dog_list) {
+	//             let li = document.createElement("li");
+	//             let node = document.createTextNode(dog);
+	//             li.appendChild(node);
+	//             container.appendChild(li);
+	//         }
+	//     });
 });
->>>>>>> 4df177d922ab81fb9265a1de0177b6f31bf19492
