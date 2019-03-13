@@ -1,0 +1,36 @@
+.menu {
+    width: 36em;
+}
+
+.card {
+    
+}
+
+.popup {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 1000;
+}
+
+.popup .note {
+    position: fixed;
+    border: 0.125em solid rgb(211, 211, 211);
+    width: 15em;
+    margin: 0;
+    bottom: 5rem;
+    right: 1rem;
+    padding: 0.5em;
+    transition: all 0.5s;
+}
+
+.popup .note:hover {
+    border: 0.125em solid rgb(166, 166, 166);
+}
+
+.popup .btn {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    max-width: 5em;
+}

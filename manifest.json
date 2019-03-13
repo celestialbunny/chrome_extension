@@ -17,9 +17,5 @@
     },
     "permissions": [
         "http://*/*", "https://*/*"
-    ],
-    "background": {
-        "scripts": ["./js/bootstrap-4.1.3.js"],
-        "persistent": false
-    }
+    ]
 }

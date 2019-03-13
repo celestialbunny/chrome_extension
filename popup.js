@@ -33,8 +33,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	 * Perform if else condition from here on
 	 */
 	url = `https://dog.ceo/api/breeds/list/all`;
-	fetchData(url)
-		.then(data => populate(data.message))
+	// fetchData(url)
+	// 	.then(data => populate(data.message))
 
 	function fetchData(url) {
 		return fetch(url)
@@ -51,14 +51,15 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	}
 
-	function populate(dog_list) {
-		const container = document.getElementById("container");
-		for (dog in dog_list) {
-			let li = document.createElement("li");
-			let node = document.createTextNode(dog);
-			li.appendChild(node);
-			container.appendChild(li);
-		}
+	function populate(bank_list) {
+		const wrapper = document.getElementById("wrapper");
+		// for (dog in dog_list) {
+		// 	let li = document.createElement("li");
+		// 	let node = document.createTextNode(dog);
+		// 	li.appendChild(node);
+		// 	container.appendChild(li);
+		// }
+		for (bank in bank_list)
 	}
 
 	/**
