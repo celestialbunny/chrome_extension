@@ -2,29 +2,29 @@
     width: 36em;
 }
 
-.card {
-    
-}
-
-.popup {
+.popout {
     position: fixed;
     bottom: 1rem;
     right: 1rem;
     z-index: 1000;
 }
 
-.popup .note {
+.popout .collapse {
+    
+}
+
+.popout .card {
     position: fixed;
     border: 0.125em solid rgb(211, 211, 211);
     width: 15em;
     margin: 0;
-    bottom: 5rem;
+    bottom: 4rem;
     right: 1rem;
     padding: 0.5em;
     transition: all 0.5s;
 }
 
-.popup .note:hover {
+.popout .card:hover {
     border: 0.125em solid rgb(166, 166, 166);
 }
 
