@@ -121,6 +121,78 @@ document.addEventListener('DOMContentLoaded', function () {
 			wrapper.insertAdjacentHTML('afterbegin', card_bank);
 		}
 	}
+	
+	const injected_css = `
+	<style type="text/css" media="screen">
+
+	#popout,
+	#toggle {
+		position: fixed;
+		z-index: 1000;
+		transition: all 0.5s;
+	}
+	
+	#toggle {
+		bottom: 3em;
+		right: 1em;
+		display: grid;
+		grid-template-columns: 3fr 1fr;
+		grid-template-areas: "detail logo"
+	}
+	
+	.detail {
+		grid-area: detail;
+		background-color: blueviolet;
+	}
+	
+	.logo {
+		grid-area: logo;
+		background-color: aquamarine;
+	}
+	
+	#info {
+		position: fixed;
+		border: 0.1em solid black;
+		padding: 0.3em;
+		bottom: 1em;
+		right: 1em;background-color: #4ebbb5;
+		color: white;
+		font-size: 1.2rem;
+		border-radius: 5px;
+	}
+	
+	#info:hover {
+		cursor: pointer;
+		background-color: #105372;
+		border: 1px solid #2E3A46;
+		box-shadow: 0 0 10px #719ECE;
+	}
+	
+	input[type=checkbox]#popout {
+		display: none;
+	}
+	#popout ~ #toggle {
+		margin-right: -100%;
+	}
+	
+	#popout:checked ~ #toggle {
+		margin-right: 0;
+	}
+	</style>
+	`;
+
+	let injected_section = `
+	<input type="checkbox" name="popout" id="popout">
+	<label for="popout" id="info">Toggle me</label>
+	<div id="toggle">
+		<div class="detail">${bank_name} offers ${bank_rate} for repayment of RM ${bank_repayment}</div>
+		<div class="logo">${package_tag}</div>
+	</div>
+	`;
+
+	
+	document.body.insertAdjacentHTML('beforeend', injected_css);
+	document.body.insertAdjacentHTML('beforeend', injected_section);
 
 	/**
 	 * Original function
