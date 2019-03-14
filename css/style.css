@@ -1,5 +1,22 @@
 .menu {
-    width: 36em;
+    width: 42em;
+}
+
+#wrapper .col-6 a {
+    text-decoration: inherit;
+    color: inherit;
+}
+
+#wrapper .col-6 .card {
+    transition: all 0.5s;
+}
+
+#wrapper .col-6 .card:hover {
+    border-width: 0.1em;
+    border-top-left-radius: 1.35em;
+    border-bottom-right-radius: 1.35em;
+    box-shadow: 0.12em 0.12em rgb(166, 166, 166);
+    cursor: pointer;
 }
 
 .popout {

@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		{
 			"bank_name": "Maybank",
 			"package_name": "super home loan",
+			"package_tag": "home",
 			"interest_rate": "3%",
 			"repayment": 30000,
 			"link": "https://www.maybank2u.com.my/home/m2u/common/login.do"
@@ -47,6 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		{
 			"bank_name": "Alliance",
 			"package_name": "Not Worth It",
+			"package_tag": "business",
 			"interest_rate": "30%",
 			"repayment": 3000000000,
 			"link": "https://www.maybank2u.com.my/home/m2u/common/login.do"
@@ -54,6 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		{
 			"bank_name": "Affin",
 			"package_name": "OMG Best Loan",
+			"package_tag": "car",
 			"interest_rate": "0.5%",
 			"repayment": 0,
 			"link": "https://www.maybank2u.com.my/home/m2u/common/login.do"
@@ -81,24 +84,39 @@ document.addEventListener('DOMContentLoaded', function () {
 		for (bank of bank_list) {
 			let bank_image = `/img/img_${bank.bank_name.toLowerCase()}.png`;
 			let bank_name = bank.bank_name;
+			let package_tag;
+			if (bank.package_tag === "personal") {
+				package_tag = "profile";
+			} else if (bank.package_tag === "islamic") {
+				package_tag = "bell";
+			} else if (bank.package_tag === "home") {
+				package_tag = "home3";
+			} else if (bank.package_tag === "car") {
+				package_tag = "truck";
+			} else if (bank.package_tag === "business") {
+				package_tag = "office";
+			}
 			let bank_package = bank.package_name;
 			let bank_rate = bank.interest_rate;
 			let bank_repayment = bank.repayment;
 			let bank_link = bank.link;
 			let card_bank =
 				`<div class="col-6">
-					<div class="card mb-4">
-						<img class="card-img-top" src="${bank_image}" alt="${bank_name}">
-						<div class="card-body">
-							<h3 class="card-title">${bank_name}</h5>
-							<div class="card-text">
-								<p>Package: <span>${bank_package}</span></p>
-								<p>Interest: <span>${bank_rate}</span></p>
-								<p>Repayment: <span>${bank_repayment}</span></p>
+					<a href="${bank_link}" target="_blank">
+						<div class="card mb-4">
+							<span title="${bank_name}">
+								<img class="card-img-top pt-3" src="${bank_image}" alt="${bank_name}">
+							</span>
+							<div class="card-body">
+								<div class="card-text">
+									<div><span class="icon icon-${package_tag}"></span>: <span>${bank_package}</span></div>
+									<div>Interest Rate: <span>${bank_rate}</span></div>
+									<div> Monthly Repayment: <span>${bank_repayment}</span></div>
+								</div>
+								
 							</div>
-							<a href="${bank_link}" class="btn btn-primary">More Info</a>
 						</div>
-					</div>
+					</a>
 				</div>`;
 			wrapper.insertAdjacentHTML('afterbegin', card_bank);
 		}
