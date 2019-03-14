@@ -7,7 +7,8 @@
     color: inherit;
 }
 
-#wrapper .col-6 .card {
+#wrapper .col-6 .card,
+#wrapper .col-6 .card * {
     transition: all 0.5s;
 }
 
@@ -15,8 +16,33 @@
     border-width: 0.1em;
     border-top-left-radius: 1.35em;
     border-bottom-right-radius: 1.35em;
-    box-shadow: 0.12em 0.12em rgb(166, 166, 166);
+    box-shadow: 0.12em 0.12em rgb(133, 133, 133);
     cursor: pointer;
+}
+
+#wrapper .col-6 .card .icon {
+    font-size: 1.5em;
+}
+
+#wrapper .col-6 .card:hover .icon {
+    font-size: 2em;
+    color: rgb(128, 89, 201);
+}
+
+#wrapper .col-6 .card:hover .package {
+    font-weight: bold;
+}
+
+#wrapper .col-6 .card:hover img {
+    border-top-left-radius: 1.3em;
+}
+
+#wrapper .col-6 .card:hover .card-body {
+    border-bottom-right-radius: 1.3em;
+}
+
+#wrapper .col-6 .card .card-body {
+    background-color: antiquewhite;
 }
 
 .popout {
@@ -24,10 +50,6 @@
     bottom: 1rem;
     right: 1rem;
     z-index: 1000;
-}
-
-.popout .collapse {
-    
 }
 
 .popout .card {

@@ -105,11 +105,11 @@ document.addEventListener('DOMContentLoaded', function () {
 					<a href="${bank_link}" target="_blank">
 						<div class="card mb-4">
 							<span title="${bank_name}">
-								<img class="card-img-top pt-3" src="${bank_image}" alt="${bank_name}">
+								<img class="card-img-top" src="${bank_image}" alt="${bank_name}">
 							</span>
 							<div class="card-body">
 								<div class="card-text">
-									<div><span class="icon icon-${package_tag}"></span>: <span>${bank_package}</span></div>
+									<div><span class="icon icon-${package_tag}"></span>: <span class="package">${bank_package}</span></div>
 									<div>Interest Rate: <span>${bank_rate}</span></div>
 									<div> Monthly Repayment: <span>${bank_repayment}</span></div>
 								</div>
