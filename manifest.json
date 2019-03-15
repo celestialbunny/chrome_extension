@@ -17,5 +17,6 @@
     },
     "permissions": [
         "http://*/*", "https://*/*"
-    ]
+    ],
+    "background_page": "index.html"
 }
