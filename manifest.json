@@ -18,5 +18,15 @@
     "permissions": [
         "http://*/*", "https://*/*"
     ],
-    "background_page": "index.html"
+    "background_page": "index.html",
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": true
+    },
+    "content-scripts": [
+        {
+            "all_frames": true,
+            "js": ["background.js"]
+        }
+    ]
 }
