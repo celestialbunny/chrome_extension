@@ -1,18 +1,18 @@
 .menu {
-    width: 42em;
+    width: 48em;
 }
 
-#wrapper .col-6 a {
+#wrapper .cardholder a {
     text-decoration: inherit;
     color: inherit;
 }
 
-#wrapper .col-6 .card,
-#wrapper .col-6 .card * {
+#wrapper .cardholder .card,
+#wrapper .cardholder .card * {
     transition: all 0.5s;
 }
 
-#wrapper .col-6 .card:hover {
+#wrapper .cardholder .card:hover {
     border-width: 0.1em;
     border-top-left-radius: 1.35em;
     border-bottom-right-radius: 1.35em;
@@ -20,28 +20,29 @@
     cursor: pointer;
 }
 
-#wrapper .col-6 .card .icon {
+#wrapper .cardholder .card .icon {
     font-size: 1.5em;
 }
 
-#wrapper .col-6 .card:hover .icon {
+#wrapper .cardholder .card:hover .icon {
     font-size: 2em;
     color: rgb(128, 89, 201);
 }
 
-#wrapper .col-6 .card:hover .package {
+#wrapper .cardholder .card:hover .package {
     font-weight: bold;
 }
 
-#wrapper .col-6 .card:hover img {
+#wrapper .cardholder .card:hover img {
     border-top-left-radius: 1.3em;
 }
 
-#wrapper .col-6 .card:hover .card-body {
+#wrapper .cardholder .card:hover .card-body {
     border-bottom-right-radius: 1.3em;
+    background-color: rgb(248, 171, 70);
 }
 
-#wrapper .col-6 .card .card-body {
+#wrapper .cardholder .card .card-body {
     background-color: antiquewhite;
 }
 
