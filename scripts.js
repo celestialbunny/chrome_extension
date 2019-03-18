@@ -359,4 +359,5 @@ document.addEventListener('DOMContentLoaded', () => {
     send_and_fetch_details(web_content);
     console.log(returned_matches);
     // highlight_matches(returned_matches);
+    https://www.bbazaar.my/car-loan.html
 })
