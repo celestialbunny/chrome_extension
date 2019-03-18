@@ -14,39 +14,39 @@
 <body>
 	<div class="menu">
 		<div class="container-fluid">
-            <h5 class="py-2">List of Loans</h5>
-            <p>Sort by:</p>
-            <div class="button-container">
-                <div class="button-container-list">
-                    <input class="sort-selection" type="radio" name="sort" id="none" value="none" checked>
-                    <label for="none" class="btn btn-outline-success btn-sm">None</label>
-                </div>
-                <div class="button-container-list">
-                    <input class="sort-selection" type="radio" name="sort" id="bank" value="bank">
-                    <label for="bank" class="btn btn-outline-success btn-sm">Bank</label>
-                </div>
-                <div class="button-container-list">
-                    <input class="sort-selection" type="radio" name="sort" id="type" value="type">
-                    <label for="type" class="btn btn-outline-success btn-sm">Type</label>
-                </div>
-                <div class="button-container-list">
-                    <input class="sort-selection" type="radio" name="sort" id="interest" value="interest">
-                    <label for="interest" class="btn btn-outline-success btn-sm">Interest</label>
-                </div>
-                <div class="button-container-list">
-                    <input class="sort-selection" type="radio" name="sort" id="repayment" value="repayment">
-                    <label for="repayment" class="btn btn-outline-success btn-sm">Repayment</label>
-                </div>
-            </div>
+			<h5 class="py-2">List of Loans</h5>
+			<p>Sort by:</p>
+			<div class="button-container d-flex mb-2">
+				<div class="button-container-list mr-2">
+					<input class="sort-selection d-none" type="radio" name="sort" id="none" value="none" checked>
+					<label for="none" class="btn btn-outline-success btn-sm">None</label>
+				</div>
+				<div class="button-container-list mr-2">
+					<input class="sort-selection d-none" type="radio" name="sort" id="bank" value="bank">
+					<label for="bank" class="btn btn-outline-success btn-sm">Bank</label>
+				</div>
+				<div class="button-container-list mr-2">
+					<input class="sort-selection d-none" type="radio" name="sort" id="type" value="type">
+					<label for="type" class="btn btn-outline-success btn-sm">Type</label>
+				</div>
+				<div class="button-container-list mr-2">
+					<input class="sort-selection d-none" type="radio" name="sort" id="interest" value="interest">
+					<label for="interest" class="btn btn-outline-success btn-sm">Interest</label>
+				</div>
+				<div class="button-container-list mr-2">
+					<input class="sort-selection d-none" type="radio" name="sort" id="repayment" value="repayment">
+					<label for="repayment" class="btn btn-outline-success btn-sm">Repayment</label>
+				</div>
+			</div>
 			<div id="wrapper" class="row">
 			</div>
 		</div>
-
 	</div>
 
 	<script src="/js/jquery-3.3.1.js"></script>
 	<script src="/js/popper.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/underscore.js"></script>
 	<script src="popup.js"></script>
 </body>
 
