@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		.then(response => {
 			if (response.ok) {
 				return response.json();
-
 			} else {
 				throw new Error(response.statusText);
 			}

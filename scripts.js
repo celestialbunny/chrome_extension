@@ -2,11 +2,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // console.log("Working");
     // set background color
     let first_bank;
+
+    function checkStatus(response) {
+        if (response.ok) {
+            return Promise.resolve(response);
+        } else {
+            return Promise.reject(new Error(response.statusText));
+        }
+    }
+
     fetch('http://127.0.0.1:5000/_words')
         .then(response => {
             if (response.ok) {
                 return response.json();
-
             } else {
                 throw new Error(response.statusText);
             }
@@ -203,158 +211,152 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function send_and_fetch_details(text_details) {
-		// 7. Send the data a specific website
-		fetch('http://127.0.0.1:5000/_words', {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify({
-				data: text_details
-			})
-		})
-			// Check the response of fetching "data" after submitting to the specified website
-			.then(checkStatus)
-			// Perform change of received "data" structure obtained from website
-			.then(res => res.json())
-			// Perform operation on the "altered" data format
-		
+        // 7. Send the data a specific website
+        fetch('http://127.0.0.1:5000/_words', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    data: text_details
+                })
+            })
+            // Check the response of fetching "data" after submitting to the specified website
+            .then(checkStatus)
+            .then(res => res.json())
+            .then(data => console.log(data))
+        // Perform operation on the "altered" data format
+
     }
-    
-    function checkStatus(response) {
-		if (response.ok) {
-			return Promise.resolve(response);
-		} else {
-			return Promise.reject(new Error(response.statusText));
-		}
-    }
-    
+
     var InstantSearch = {
 
-		"highlight": function (container, highlightText) {
-			var internalHighlighter = function (options) {
+        "highlight": function (container, highlightText) {
+            var internalHighlighter = function (options) {
 
-				var id = {
-					container: "container",
-					tokens: "tokens",
-					all: "all",
-					token: "token",
-					className: "className",
-					sensitiveSearch: "sensitiveSearch"
-				},
-					tokens = options[id.tokens],
-					allClassName = options[id.all][id.className],
-					allSensitiveSearch = options[id.all][id.sensitiveSearch];
-
-
-				function checkAndReplace(node, tokenArr, classNameAll, sensitiveSearchAll) {
-					var nodeVal = node.nodeValue,
-						parentNode = node.parentNode,
-						i, j, curToken, myToken, myClassName, mySensitiveSearch,
-						finalClassName, finalSensitiveSearch,
-						foundIndex, begin, matched, end,
-						textNode, span, isFirst;
-
-					for (i = 0, j = tokenArr.length; i < j; i++) {
-						curToken = tokenArr[i];
-						myToken = curToken[id.token];
-						myClassName = curToken[id.className];
-						mySensitiveSearch = curToken[id.sensitiveSearch];
-
-						finalClassName = (classNameAll ? myClassName + " " + classNameAll : myClassName);
-
-						finalSensitiveSearch = (typeof sensitiveSearchAll !== "undefined" ? sensitiveSearchAll : mySensitiveSearch);
-
-						isFirst = true;
-						while (true) {
-							if (finalSensitiveSearch)
-								foundIndex = nodeVal.indexOf(myToken);
-							else
-								foundIndex = nodeVal.toLowerCase().indexOf(myToken);
-
-							if (foundIndex < 0) {
-								if (isFirst)
-									break;
-
-								if (nodeVal) {
-									textNode = document.createTextNode(nodeVal);
-									parentNode.insertBefore(textNode, node);
-								} // End if (nodeVal)
-
-								parentNode.removeChild(node);
-								break;
-							} // End if (foundIndex < 0)
-
-							isFirst = false;
+                var id = {
+                        container: "container",
+                        tokens: "tokens",
+                        all: "all",
+                        token: "token",
+                        className: "className",
+                        sensitiveSearch: "sensitiveSearch"
+                    },
+                    tokens = options[id.tokens],
+                    allClassName = options[id.all][id.className],
+                    allSensitiveSearch = options[id.all][id.sensitiveSearch];
 
 
-							begin = nodeVal.substring(0, foundIndex);
-							matched = nodeVal.substr(foundIndex, myToken.length);
+                function checkAndReplace(node, tokenArr, classNameAll, sensitiveSearchAll) {
+                    var nodeVal = node.nodeValue,
+                        parentNode = node.parentNode,
+                        i, j, curToken, myToken, myClassName, mySensitiveSearch,
+                        finalClassName, finalSensitiveSearch,
+                        foundIndex, begin, matched, end,
+                        textNode, span, isFirst;
 
-							if (begin) {
-								textNode = document.createTextNode(begin);
-								parentNode.insertBefore(textNode, node);
-							} // End if (begin)
+                    for (i = 0, j = tokenArr.length; i < j; i++) {
+                        curToken = tokenArr[i];
+                        myToken = curToken[id.token];
+                        myClassName = curToken[id.className];
+                        mySensitiveSearch = curToken[id.sensitiveSearch];
 
-							span = document.createElement("span");
-							span.className += finalClassName;
-							span.appendChild(document.createTextNode(matched));
-							parentNode.insertBefore(span, node);
+                        finalClassName = (classNameAll ? myClassName + " " + classNameAll : myClassName);
 
-							nodeVal = nodeVal.substring(foundIndex + myToken.length);
-						} // Whend
+                        finalSensitiveSearch = (typeof sensitiveSearchAll !== "undefined" ? sensitiveSearchAll : mySensitiveSearch);
 
-					} // Next i 
-				}; // End Function checkAndReplace 
+                        isFirst = true;
+                        while (true) {
+                            if (finalSensitiveSearch)
+                                foundIndex = nodeVal.indexOf(myToken);
+                            else
+                                foundIndex = nodeVal.toLowerCase().indexOf(myToken);
 
-				function iterator(p) {
-					if (p === null) return;
+                            if (foundIndex < 0) {
+                                if (isFirst)
+                                    break;
 
-					var children = Array.prototype.slice.call(p.childNodes),
-						i, cur;
+                                if (nodeVal) {
+                                    textNode = document.createTextNode(nodeVal);
+                                    parentNode.insertBefore(textNode, node);
+                                } // End if (nodeVal)
 
-					if (children.length) {
-						for (i = 0; i < children.length; i++) {
-							cur = children[i];
-							if (cur.nodeType === 3) {
-								checkAndReplace(cur, tokens, allClassName, allSensitiveSearch);
-							} else if (cur.nodeType === 1) {
-								iterator(cur);
-							}
-						}
-					}
-				}; // End Function iterator
+                                parentNode.removeChild(node);
+                                break;
+                            } // End if (foundIndex < 0)
 
-				iterator(options[id.container]);
-			} // End Function highlighter
-				;
-			internalHighlighter({
-				container: container,
-				all: {
-					className: "highlighter"
-				},
-				tokens: [{
-					token: highlightText,
-					className: "highlight",
-					sensitiveSearch: false
-				}]
-			}); // End Call internalHighlighter 
+                            isFirst = false;
 
-		} // End Function highlight
 
-	};
+                            begin = nodeVal.substring(0, foundIndex);
+                            matched = nodeVal.substr(foundIndex, myToken.length);
 
-	function highlight_matches(highlightText) {
-		const body = document.body;
-		InstantSearch.highlight(body, highlightText);
-	}
+                            if (begin) {
+                                textNode = document.createTextNode(begin);
+                                parentNode.insertBefore(textNode, node);
+                            } // End if (begin)
+
+                            span = document.createElement("span");
+                            span.className += finalClassName;
+                            span.appendChild(document.createTextNode(matched));
+                            parentNode.insertBefore(span, node);
+
+                            nodeVal = nodeVal.substring(foundIndex + myToken.length);
+                        } // Whend
+
+                    } // Next i 
+                }; // End Function checkAndReplace 
+
+                function iterator(p) {
+                    if (p === null) return;
+
+                    var children = Array.prototype.slice.call(p.childNodes),
+                        i, cur;
+
+                    if (children.length) {
+                        for (i = 0; i < children.length; i++) {
+                            cur = children[i];
+                            if (cur.nodeType === 3) {
+                                checkAndReplace(cur, tokens, allClassName, allSensitiveSearch);
+                            } else if (cur.nodeType === 1) {
+                                iterator(cur);
+                            }
+                        }
+                    }
+                }; // End Function iterator
+
+                iterator(options[id.container]);
+            } // End Function highlighter
+            ;
+            internalHighlighter({
+                container: container,
+                all: {
+                    className: "highlighter"
+                },
+                tokens: [{
+                    token: highlightText,
+                    className: "highlight",
+                    sensitiveSearch: false
+                }]
+            }); // End Call internalHighlighter 
+
+        } // End Function highlight
+
+    };
+
+    function highlight_matches(highlightText) {
+        const body = document.body;
+        InstantSearch.highlight(body, highlightText);
+    }
 
 
     /**
      * Start of call of functions
      */
-    returned_matches = ['Just'];
+    returned_matches = [];
     web_content = filter_text();
+    console.log(web_content)
     send_and_fetch_details(web_content);
-    highlight_matches(returned_matches);
+    console.log(returned_matches);
+    // highlight_matches(returned_matches);
 })
