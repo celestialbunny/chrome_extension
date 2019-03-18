@@ -317,4 +317,4 @@ document.addEventListener('DOMContentLoaded', function () {
 		let stringified_body = JSON.stringify(cloned_body);
 		return stringified_body;
 	}
-
+})
