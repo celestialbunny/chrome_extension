@@ -46,7 +46,10 @@
     background-color: antiquewhite;
 }
 
+.sort-selection:checked ~ .btn-outline-success {
+    background-color: #28a745;
+    color: white;
+}
 /*
 Below will be the styles for the injection
 */
-

@@ -1,54 +1,87 @@
 document.addEventListener('DOMContentLoaded', function () {
 	// This will execute inside the window of the "chrome extension"
-	// console.log("hahahah");
 	let bank_list = [];
-	const selections = document.querySelectorAll('.sort-selection');
-	let selection;
-	document.addEventListener('click', function() {
-		console.log(selections)
-		for (select of selections) {
-			if (select.checked === true) {
-				selection = select.id;
-				console.log(select.id)
-			}
-		}
-	})
+
+		// Reposition
+	});
 	// console.log(selections[0].value)
 	const container = document.getElementById("container");
 	fetch('http://127.0.0.1:5000/_words')
 		.then(response => {
 			if (response.ok) {
 				return response.json();
+				
 			} else {
 				throw new Error(response.statusText);
 			}
 		})
 		.then(data => {
-			// bank_list.push(data);
-			// console.log(bank_list.length)
-			// console.log(typeof(data))
-			// console.log(data[0].bank_name)
 			/**
-			 * Below is the working line that has been commented out
+			 * Capture list of banks and sort them out manually (in other lists)
 			 */
-			// for (bank of data) {
-			// 	populate(bank);
-			// }
-			for (bank of data) {
-				if (selection === 'none') {
-					populate(bank);
-				} else if (selection === 'bank') {
-					if (bank.bank_name !== 'none') {
-						populate(bank);
-					}
-				} else if (selection === 'type') {
-					
-				}
+			// Original full collection
+			bank_list = data;
+			// Sorting using bank_name
+			order_by_bank_name = _.sortBy(bank_list, 'bank_name')
+			// Sorting using package_tag
+			order_by_package_tag = _.sortBy(bank_list, 'package_tag');
+			// Sorting using interest rate
+			order_by_interest_rate = _.sortBy(bank_list, 'interest_rate');
+			// Sorting using repayment
+			order_by_repayment = _.sortBy(bank_list, 'repayment');
+			/**
+			 * Reveal the data fetched from API
+			 */
+			const selections = document.querySelectorAll('.sort-selection');
+			let selection;
+			const wrapper = document.getElementById("wrapper");
+			for (bank of bank_list) {
+				populate(bank, wrapper);
 			}
-		});
+			document.addEventListener('click', function() {
+				// console.log(selections)
+				for (select of selections) {
+					if (select.checked === true) {
+						selection = select.id;
+						// console.log(selection);
+					}
+				}
+				if (selection === "none") {
+					erase_display(wrapper);
+					for (bank of bank_list) {
+						populate(bank, wrapper);
+					}
+				} else if (selection === "bank") {
+					erase_display(wrapper);
+					for (bank of order_by_bank_name) {
+						populate(bank, wrapper);
+					}
+				} else if (selection === "type") {
+					erase_display(wrapper);
+					for (bank of order_by_package_tag) {
+						populate(bank, wrapper)
+					}
+				} else if (selection === "interest") {
+					erase_display(wrapper);
+					for (bank of order_by_interest_rate) {
+						populate(bank, wrapper)
+					}
+				} else if (selection === "repayment") {
+					erase_display(wrapper);
+					for (bank of order_by_repayment) {
+						populate(bank, wrapper)
+					}
+				}
+			});
 
-	function populate(bank) {
-		const wrapper = document.getElementById("wrapper");
+	function erase_display(placeholder) {
+		while (placeholder.lastChild) {
+			placeholder.removeChild(placeholder.lastChild);
+		}
+	}
+
+	function populate(bank, placeholder) {
+		// for (bank in bank_link) {
 			let bank_image = `./img/img_${bank.bank_name.toLowerCase()}.png`;
 			let bank_name = bank.bank_name;
 			let package_tag;
@@ -77,23 +110,23 @@ document.addEventListener('DOMContentLoaded', function () {
 							<div class="card-body">
 								<div class="card-text">
 									<div><span class="icon icon-${package_tag}"></span>: <span class="package">${bank_package}</span></div>
-									<div>Interest Rate: <span>${bank_rate}</span></div>
+									<div>Interest Rate: <span>${bank_rate} %</span></div>
 									<div> Monthly Repayment: <span>${bank_repayment}</span></div>
 								</div>
 							</div>
 						</div>
 					</a>
 				</div>`;
-			wrapper.insertAdjacentHTML('afterbegin', card_bank);
+			placeholder.insertAdjacentHTML('afterbegin', card_bank);
 		// }
 	}
 	// This will execute in the current browser DOM
-	// chrome.tabs.executeScript(null, function () {
-	//     returned_matches = [];
-	//     web_content = filter_text();
-	//     send_and_fetch_details(web_content);
-	//     highlight_matches(returned_matches);
-	// })
+	chrome.tabs.executeScript(null, function () {
+	    returned_matches = [];
+	    web_content = filter_text();
+	    send_and_fetch_details(web_content);
+	    highlight_matches(returned_matches);
+	})
 });
 
 var InstantSearch = {
