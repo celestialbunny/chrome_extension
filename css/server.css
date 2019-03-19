@@ -50,6 +50,9 @@
     background-color: #28a745;
     color: white;
 }
+.highlight {
+    background-color: yellow;
+  }
 /*
 Below will be the styles for the injection
 */
