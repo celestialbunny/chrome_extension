@@ -28,8 +28,5 @@
                 "scripts.js"
             ]
         }
-    ],
-    "web_accessible_resources": [
-        "style.css"
     ]
 }

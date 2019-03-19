@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // console.log("Working");
     // set background color
     let first_bank;
-    
+
     const counts = [];
 
     function checkStatus(response) {
@@ -128,14 +128,15 @@ document.addEventListener('DOMContentLoaded', () => {
             position: fixed !important;
             bottom: 3em !important;
             right: 0 !important;
-            background-color: tomato !important;
+            background-color: rgb(254, 254, 162) !important;
             box-shadow: 0 5px 10px #ddd !important;
-            border: 2px solid violet !important;
+            border: 2px solid rgb(244, 244, 86) !important;
             padding: 0.1em 0.5em !important;
             border-top-left-radius: 1.25em !important;
             border-bottom-left-radius: 1.25em !important;
             animation: disappear 3s !important;
             animation-fill-mode: forwards !important;
+            width: 15vw !important;
         }
         
         .flash * {
@@ -155,26 +156,25 @@ document.addEventListener('DOMContentLoaded', () => {
             `);
 
             let injected_section = `
-            <div class="slider">
-                <a href="${first_bank.link}" target="_blank" class="clear">
-                    <input type="checkbox" name="popout" id="popout">
-                    <label for="popout" id="info">&times;</label>
-                    <div id="toggle">
-                        <div class="detail">
-                            <div class="highlight"><span class="icon icon-${first_bank.package_tag}"></span>${first_bank.bank_name}</div>
-                            <div>${first_bank.interest_rate} @ RM ${first_bank.repayment}</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            
             <div class="flash">
-                <p>
-                    <span class="icon icon-${first_bank.package_tag}"></span>
-                    ${first_bank.bank_name} offers ${first_bank.interest_rate} @ RM ${first_bank.bank_repayment}</div>
-                </p>
+            <p>
+            <span class="icon icon-${first_bank.package_tag}"></span>
+            <span>Hey! 👋 ${first_bank.package_name} is currently offering ${first_bank.package_tag} loan at ${first_bank.interest_rate}% ! Click me to find out more! </span>
+            </p>
             </div>
             `;
+            // <div class="slider">
+            //     <a href="${first_bank.bank_link}" target="_blank" class="clear">
+            //         <input type="checkbox" name="popout" id="popout">
+            //         <label for="popout" id="info">&times;</label>
+            //         <div id="toggle">
+            //             <div class="detail">
+            //                 <div class="highlight"><span class="icon icon-${first_bank.package_tag}"></span>${first_bank.bank_name}</div>
+            //                 <span>Hey! 👋 ${first_bank.package_name} is currently offering ${first_bank.package_tag} loan at ${first_bank.interest_rate}% ! Click me to find out more! </span>
+            //             </div>
+            //         </div>
+            //     </a>
+            // </div>
 
             document.body.insertAdjacentHTML("beforeend", injected_section)
         })
@@ -219,14 +219,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function send_and_fetch_details(text_details) {
         // 7. Send the data a specific website
         fetch('http://127.0.0.1:5000/_words', {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    data: text_details
-                })
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                data: text_details
             })
+        })
             // Check the response of fetching "data" after submitting to the specified website
             // .then(checkStatus)
             .then(res => res.json())
@@ -251,13 +251,13 @@ document.addEventListener('DOMContentLoaded', () => {
             var internalHighlighter = function (options) {
 
                 var id = {
-                        container: "container",
-                        tokens: "tokens",
-                        all: "all",
-                        token: "token",
-                        className: "className",
-                        sensitiveSearch: "sensitiveSearch"
-                    },
+                    container: "container",
+                    tokens: "tokens",
+                    all: "all",
+                    token: "token",
+                    className: "className",
+                    sensitiveSearch: "sensitiveSearch"
+                },
                     tokens = options[id.tokens],
                     allClassName = options[id.all][id.className],
                     allSensitiveSearch = options[id.all][id.sensitiveSearch];
@@ -343,7 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 iterator(options[id.container]);
             } // End Function highlighter
-            ;
+                ;
             internalHighlighter({
                 container: container,
                 all: {
