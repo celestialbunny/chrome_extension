@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // console.log("Working");
     // set background color
     let first_bank;
+    
+    const counts = [];
 
     function checkStatus(response) {
         if (response.ok) {
@@ -137,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         .flash * {
-            transition-delay: 3s !important;
+            transition-delay: 1s !important;
             
         }
         
@@ -175,6 +177,10 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
 
             document.body.insertAdjacentHTML("beforeend", injected_section)
+        })
+        .then(data => {
+            web_content = filter_text();
+            send_and_fetch_details(web_content);
         })
 
     function filter_text() {
@@ -222,9 +228,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
             })
             // Check the response of fetching "data" after submitting to the specified website
-            .then(checkStatus)
+            // .then(checkStatus)
             .then(res => res.json())
-            .then(data => console.log(data))
+            .then(data => {
+                console.log(data);
+                // const distinct_matches = [...new Set(data)];
+
+                for (let i = 0; i < data.length; i++) {
+                    let num = data[i];
+                    counts[num] = counts[num] ? counts[num] + 1 : 1;
+                }
+                console.log(counts);
+                // console.log(distinct_matches);
+            })
         // Perform operation on the "altered" data format
 
     }
@@ -349,15 +365,4 @@ document.addEventListener('DOMContentLoaded', () => {
         InstantSearch.highlight(body, highlightText);
     }
 
-
-    /**
-     * Start of call of functions
-     */
-    returned_matches = [];
-    web_content = filter_text();
-    console.log(web_content)
-    send_and_fetch_details(web_content);
-    console.log(returned_matches);
-    // highlight_matches(returned_matches);
-    https://www.bbazaar.my/car-loan.html
 })

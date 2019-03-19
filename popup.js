@@ -26,60 +26,69 @@ document.addEventListener('DOMContentLoaded', function () {
 			/**
 			 * Capture list of banks and sort them out manually (in other lists)
 			 */
-			// Original full collection
-			bank_list = data;
-			// Sorting using bank_name
-			order_by_bank_name = _.sortBy(bank_list, 'bank_name').reverse();
-			// Sorting using package_tag
-			order_by_package_tag = _.sortBy(bank_list, 'package_tag');
-			// Sorting using interest rate
-			order_by_interest_rate = _.sortBy(bank_list, 'interest_rate').reverse();
-			// Sorting using repayment
-			order_by_repayment = _.sortBy(bank_list, 'repayment').reverse();
+			create_arrays(data)
 			/**
 			 * Reveal the data fetched from API
 			 */
-			const selections = document.querySelectorAll('.sort-selection');
-			let selection;
-			const wrapper = document.getElementById("wrapper");
-			for (bank of bank_list) {
-				populate(bank, wrapper);
+			populate_cards();
+
+
+			function create_arrays(data) {
+				// Original full collection
+				bank_list = data;
+				// Sorting using bank_name
+				order_by_bank_name = _.sortBy(bank_list, 'bank_name').reverse();
+				// Sorting using package_tag
+				order_by_package_tag = _.sortBy(bank_list, 'package_tag');
+				// Sorting using interest rate
+				order_by_interest_rate = _.sortBy(bank_list, 'interest_rate').reverse();
+				// Sorting using repayment
+				order_by_repayment = _.sortBy(bank_list, 'repayment').reverse();
 			}
-			document.addEventListener('click', function () {
-				// console.log(selections)
-				for (select of selections) {
-					if (select.checked === true) {
-						selection = select.id;
-						// console.log(selection);
-					}
+
+			function populate_cards() {
+				const selections = document.querySelectorAll('.sort-selection');
+				let selection;
+				const wrapper = document.getElementById("wrapper");
+				for (bank of bank_list) {
+					populate(bank, wrapper);
 				}
-				if (selection === "none") {
-					erase_display(wrapper);
-					for (bank of bank_list) {
-						populate(bank, wrapper);
+				document.addEventListener('click', function () {
+					// console.log(selections)
+					for (select of selections) {
+						if (select.checked === true) {
+							selection = select.id;
+							// console.log(selection);
+						}
 					}
-				} else if (selection === "bank") {
-					erase_display(wrapper);
-					for (bank of order_by_bank_name) {
-						populate(bank, wrapper);
+					if (selection === "none") {
+						erase_display(wrapper);
+						for (bank of bank_list) {
+							populate(bank, wrapper);
+						}
+					} else if (selection === "bank") {
+						erase_display(wrapper);
+						for (bank of order_by_bank_name) {
+							populate(bank, wrapper);
+						}
+					} else if (selection === "type") {
+						erase_display(wrapper);
+						for (bank of order_by_package_tag) {
+							populate(bank, wrapper)
+						}
+					} else if (selection === "interest") {
+						erase_display(wrapper);
+						for (bank of order_by_interest_rate) {
+							populate(bank, wrapper)
+						}
+					} else if (selection === "repayment") {
+						erase_display(wrapper);
+						for (bank of order_by_repayment) {
+							populate(bank, wrapper)
+						}
 					}
-				} else if (selection === "type") {
-					erase_display(wrapper);
-					for (bank of order_by_package_tag) {
-						populate(bank, wrapper)
-					}
-				} else if (selection === "interest") {
-					erase_display(wrapper);
-					for (bank of order_by_interest_rate) {
-						populate(bank, wrapper)
-					}
-				} else if (selection === "repayment") {
-					erase_display(wrapper);
-					for (bank of order_by_repayment) {
-						populate(bank, wrapper)
-					}
-				}
-			});
+				});
+			}
 
 			function erase_display(placeholder) {
 				while (placeholder.lastChild) {
@@ -129,22 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				// }
 			}
 			// This will execute in the current browser DOM
-			// chrome.tabs.executeScript(null, function () {
-			// 	// highlight_matches(returned_matches);
-			// })
+			chrome.tabs.executeScript(null, function () {
+			})
 		});
-
-
-
-
-
-	function checkStatus(response) {
-		if (response.ok) {
-			return Promise.resolve(response);
-		} else {
-			return Promise.reject(new Error(response.statusText));
-		}
-	}
-
-	
 });
