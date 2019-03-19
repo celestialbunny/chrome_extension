@@ -97,14 +97,15 @@ input[type=checkbox]#popout {
     position: fixed !important;
     bottom: 3em !important;
     right: 0 !important;
-    background-color: tomato !important;
+    background-color: rgb(254, 254, 162) !important;
     box-shadow: 0 5px 10px #ddd !important;
-    border: 2px solid violet !important;
+    border: 2px solid rgb(244, 244, 86) !important;
     padding: 0.1em 0.5em !important;
     border-top-left-radius: 1.25em !important;
     border-bottom-left-radius: 1.25em !important;
     animation: disappear 3s !important;
     animation-fill-mode: forwards !important;
+    width: 15vw !important;
 }
 
 .flash * {
@@ -120,3 +121,4 @@ input[type=checkbox]#popout {
     60% { margin-right: 0% !important; }
     100% { margin-right: -100% !important; }
 }
+
