@@ -137,8 +137,5 @@ document.addEventListener('DOMContentLoaded', function () {
 				placeholder.insertAdjacentHTML('afterbegin', card_bank);
 				// }
 			}
-			// This will execute in the current browser DOM
-			chrome.tabs.executeScript(null, function () {
-			})
 		});
 });

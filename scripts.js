@@ -26,103 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // console.log(first_bank);
         })
         .then(data => {
-
+            web_content = filter_text();
+            send_and_fetch_details(web_content);
+        })
+        .then(data => {
             $('body').append(`
         <style type="text/css" media="screen">
-        #popout,
-        #toggle {
-            position: fixed !important;
-            transition: all 2s !important;
-        }
-        
-        #info {
-            z-index: 1000 !important;
-        }
-        
-        #toggle {
-            bottom: 1em !important;
-            right: 1em !important;
-            display: grid !important;
-            grid-template-columns: minmax(min-content, 10em) minmax(min-content, 3em) !important;
-            grid-template-areas: "detail" !important;
-            display: flex !important;
-            justify-content: center !important;
-            align-items: center !important;
-            background-color: rgb(10, 177, 19) !important;
-            z-index: 500 !important;
-            border-bottom-left-radius: 0.7em !important;
-            border-top-left-radius: 0.7em !important;
-        }
-        
-        #toggle:hover {
-            background-color: rgb(255, 85, 85) !important;
-        }
-        
-        #toggle:hover .highlight {
-            font-size: 1.15em !important;
-            color: rgb(194, 197, 199) !important;
-        }
-        
-        #toggle * {
-            transition: all 0.3s !important;
-            vertical-align: middle !important;
-            padding: 0.2em !important;
-            color: white !important;
-        }
-        
-        .detail {
-            grid-area: detail !important;
-        }
-        
-        #info {
-            position: fixed !important;
-            border: 0.1em solid black !important;
-            padding: 0.3em !important;
-            width: 1em !important;
-            height: 1em !important;
-            bottom: 3em !important;
-            right: 0 !important;
-            background-color: #4ebbb5 !important;
-            color: white !important;
-            font-size: 1.2rem !important;
-            border-radius: 50% !important;
-            text-align: center !important;
-            box-shadow: 0 0 10px #719ECE !important;
-            transition-property: transform !important;
-            transition-duration: 1s !important;
-        }
-        
-        #info:hover {
-            cursor: pointer !important;
-            background-color: #105372 !important;
-            border: 1px solid #2E3A46 !important;
-            animation-name: rotate !important; 
-            animation-duration: 2s !important; 
-            animation-iteration-count: infinite !important;
-            animation-timing-function: linear !important;
-        }
-        
-        @keyframes rotate {
-            from {transform: rotate(0deg) !important;}
-            to {transform: rotate(360deg) !important;}
-        }
-        
-        input[type=checkbox]#popout {
-            display: none !important;
-        }
-        #popout ~ #toggle {
-            margin-right: -100% !important;
-        }
-        
-        .slider:hover #popout ~ #toggle {
-            margin-right: 0 !important;
-        }
-        
-        .slider .clear * {
-            text-decoration: initial !important;
-            color: initial !important;
-        }
-        
         .flash {
             z-index: 1500 !important;
             position: fixed !important;
@@ -134,53 +43,52 @@ document.addEventListener('DOMContentLoaded', () => {
             padding: 0.1em 0.5em !important;
             border-top-left-radius: 1.25em !important;
             border-bottom-left-radius: 1.25em !important;
-            animation: disappear 3s !important;
-            animation-fill-mode: forwards !important;
-            width: 15vw !important;
+            /* animation: disappear 3s !important; */
+            /* width: 15vw !important; */
+            width: 18em !important;
+            margin-right: -16em !important;
+            transition: all 1.5s cubic-bezier(0.075, 0.82, 0.165, 1) !important;
+            display: grid !important;
+            grid-template-areas: "arrow item";
         }
         
-        .flash * {
-            transition-delay: 1s !important;
-            
+        plain {
+            text-decoration: none !important;
+            color: inherit !important;
+            border-bottom-style: none !important;
         }
         
-        @keyframes disappear {
-            0% { margin-right: 10% !important; }
-            15% { margin-right: 7% }
-            30% { margin-right: 4% !important; }
-            45% { margin-right: 1% !important; }
-            60% { margin-right: 0% !important; }
-            100% { margin-right: -100% !important; }
+        .arrow {
+            grid-area: arrow;
+            margin-right: 0.7em !important;
+            transition: all 1.5s cubic-bezier(0.075, 0.82, 0.165, 1) !important;
+        }
+        
+        .item {
+            grid-area: item;
+        }
+        
+        .flash:hover {
+            margin-right: 0 !important;
         }
         </style >
             `);
 
             let injected_section = `
+            <a class="plain" href="${first_bank.link}" target="_blank">
             <div class="flash">
-            <p>
-            <span class="icon icon-${first_bank.package_tag}"></span>
-            <span>Hey! 👋 ${first_bank.package_name} is currently offering ${first_bank.package_tag} loan at ${first_bank.interest_rate}% ! Click me to find out more! </span>
-            </p>
+                <div class="arrow">
+                    <span class="icon">👋</span>
+                </div>
+                <div class="item">
+                    <span class="icon icon-${first_bank.package_tag}"></span>
+                    <span>Hey! ${first_bank.package_name} is currently offering ${first_bank.package_tag} loan at
+                        ${first_bank.interest_rate}% ! Click me to find out more! </span>
+                </div>
             </div>
-            `;
-            // <div class="slider">
-            //     <a href="${first_bank.bank_link}" target="_blank" class="clear">
-            //         <input type="checkbox" name="popout" id="popout">
-            //         <label for="popout" id="info">&times;</label>
-            //         <div id="toggle">
-            //             <div class="detail">
-            //                 <div class="highlight"><span class="icon icon-${first_bank.package_tag}"></span>${first_bank.bank_name}</div>
-            //                 <span>Hey! 👋 ${first_bank.package_name} is currently offering ${first_bank.package_tag} loan at ${first_bank.interest_rate}% ! Click me to find out more! </span>
-            //             </div>
-            //         </div>
-            //     </a>
-            // </div>
-
-            document.body.insertAdjacentHTML("beforeend", injected_section)
-        })
-        .then(data => {
-            web_content = filter_text();
-            send_and_fetch_details(web_content);
+        </a>
+`
+            $('body').append(injected_section)
         })
 
     function filter_text() {
